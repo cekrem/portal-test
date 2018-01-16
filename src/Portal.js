@@ -1,7 +1,12 @@
 import { Component } from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types'
 
 class Portal extends Component {
+  static propTypes = {
+    onClose: PropTypes.func
+  }
+
   containerEl = document.createElement('div');
   externalWindow = null;
   
@@ -16,6 +21,9 @@ class Portal extends Component {
 
     // Append the container <div> (that has props.children appended to it) to the body of the new window
     this.externalWindow.document.body.appendChild(this.containerEl);
+
+    // Add close handler
+    this.externalWindow.onbeforeunload = this.props.onClose
   }
 
   componentWillUnmount() {

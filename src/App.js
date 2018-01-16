@@ -14,6 +14,10 @@ class App extends Component {
   togglePortal = () => {
     this.setState(state => Object.assign({}, state, {showPortal: !state.showPortal}))
   }
+
+  onCloseModal = () => {
+    this.setState({showPortal: false})
+  }
   
   componentDidMount() {
     this.interval = setInterval(() => {
@@ -37,7 +41,7 @@ class App extends Component {
       {this.state.showPortal ? 'Close the' : 'Open a'} Portal
       </button>
       {this.state.showPortal && (
-        <Portal>
+        <Portal onClose={this.onCloseModal}>
           <h1>
             Counter in portal: {this.state.counter}
           </h1>
